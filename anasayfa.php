@@ -7,9 +7,10 @@ if (isset($_GET["pc"])) {
     $control->execute();
     if ($control->rowCount() > 0) {
         $control = $control->fetch(PDO::FETCH_ASSOC);
+        $_SESSION["k"] = "pc";
         include "navbar.php";
 ?>
-        <div class="card col-sm-8 m-auto bg-dark text-light border-white text-center">
+        <div class="card col-sm-8 m-auto bg-dark text-light border-white text-center mt-3">
             <div class="card-header text-p-emphasis border-white text-uppercase fs-5">ID: #<?= $control["computer_no"]; ?></div>
             <div class="card-body border-white">
                 <div class="row justify-content-center">
@@ -107,7 +108,17 @@ if (isset($_GET["pc"])) {
                     <?php } ?>
                 </div>
             </div>
-            <div class="card-footer border-white"></div>
+            <div class="card-footer border-white">
+                <p class="m-0">
+                    <span class="text-warning">
+                        <i class="fi fi-rr-crown"></i> Arda Anıl
+                    </span>
+                    &
+                    <span class="text-w-emphasis">
+                        Eren Mutlu
+                    </span>
+                </p>
+            </div>
         </div>
     <?php
     } else {

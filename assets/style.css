@@ -103,6 +103,10 @@ input::-webkit-inner-spin-button {
     color: #9edfc1 !important;
 }
 
+.text-w-emphasis {
+    color: #c8ba91 !important;
+}
+
 .text-p-emphasis2 {
     color: #adceff !important;
 }
