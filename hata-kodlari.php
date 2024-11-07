@@ -50,5 +50,42 @@
             </div>
         </div>
     </div>
-
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button bg-dark text-danger collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ac-5" aria-expanded="false">
+                Hata Kodu: I-05
+            </button>
+        </h2>
+        <div id="ac-5" class="accordion-collapse collapse">
+            <div class="accordion-body text-light">
+                I-05: Geçersiz ID adresi.
+                <p class="m-0">Not: Bilgisayar sistemden silinmiş olabilir veya qr kod hatalı olabilir.</p>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button bg-dark text-danger collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ac-7" aria-expanded="false">
+                Hata Kodu: I-65
+            </button>
+        </h2>
+        <div id="ac-7" class="accordion-collapse collapse">
+            <div class="accordion-body text-light">
+                I-65: Bilgisayar düzenlemek için lütfen işlem seçiniz Hatalı işlem kodu.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button bg-dark text-danger collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ac-6" aria-expanded="false">
+                Hata Kodu: R-04
+            </button>
+        </h2>
+        <div id="ac-6" class="accordion-collapse collapse">
+            <div class="accordion-body text-light">
+                R-04: Bakım kaydedilirken bakım açıklaması yapılması zorunludur.
+            </div>
+        </div>
+    </div>
+    <!-- <p class="m-0 text-danger">Hata Kodu: </p> -->
 </div>

@@ -3,10 +3,12 @@
     if (isset($_GET["pc"]) && isset($kadi)) {
         $ayir = explode(",", clean($_GET["pc"]));
         $pc_id = $ayir[0];
-        if ($ayir[1] == 1) {
+        if (isset($ayir[1]) && $ayir[1] == 1) {
             include "duzenle_page.php";
-        } elseif ($ayir[1] == 2) {
+        } elseif (isset($ayir[1]) && $ayir[1] == 2) {
             include "bakim_page.php";
+        } else {
+            echo '<p class="m-0 text-danger text-center fs-3">Hata Kodu: I-65</p>';
         }
     } else {
     ?>

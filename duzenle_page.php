@@ -63,8 +63,8 @@ if (isset($kadi)) {
             $control = $conn->prepare("SELECT * FROM computer_user WHERE computer_user_no = :pc_id");
             $control->bindValue('pc_id', $pc_id);
             $control->execute();
-            echo '<h4 class="text-warning mt-4 mb-0">Bilgisayar Kullanıcıları: ' . $control->rowCount() . '</h4>'; ?>
-            <button id="kullanici_ekle" name="kullanici_ekle" type="submit" class="btn btn-warning col-sm-3 mt-3"><i class="fi fi-rr-user-add"></i> Kullanıcı Ekle</button>
+            echo '<h4 class="text-warning mt-4 mb-0">Kullanıcılar: ' . $control->rowCount() . '</h4>'; ?>
+            <button id="kullanici_ekle" name="kullanici_ekle" type="submit" class="btn btn-warning col-sm-3 col-6 mt-3"><i class="fi fi-rr-user-add"></i> Kullanıcı Ekle</button>
             <?php
             if (isset($_POST["kullanici_kaydet"])) {
                 $name = clean($_POST["new_user_name"]);
@@ -227,9 +227,93 @@ if (isset($kadi)) {
                 }
                 header("location: bilgisayarlar");
             }
+            $control = $conn->prepare("SELECT * FROM maintenance
+            INNER JOIN users ON maintenance.maintenance_user = users.user_id
+            WHERE maintenance_no = :pc_id");
+            $control->bindValue('pc_id', $pc_id);
+            $control->execute();
+            echo '<h4 class="text-warning mt-4 mb-0">Bakımlar: ' . $control->rowCount() . '</h4>'; ?>
+            <button type="button" class="btn btn-warning col-sm-3 col-6" data-bs-toggle="modal" data-bs-target="#bakimEkleAdmin">
+                Bakım Ekle
+            </button>
+            <div class="modal fade" id="bakimEkleAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content bg-dark">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Bakım Ekle</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-light">
+                            <?php
+                            $zaman = date("d.m.Y - H:i");
+                            if (isset($_POST["bakim_kaydet"])) {
+                                $bakim = clean($_POST["bakim_text"]);
+                                if ($bakim != "") {
+                                    $control = $conn->prepare("INSERT INTO maintenance (
+                                                maintenance_no,
+                                                maintenance_text,
+                                                maintenance_user,
+                                                maintenance_date) VALUES(
+                                                :pc_id,
+                                                :bakim,
+                                                :user,
+                                                :bakim_date)");
+                                    $control->bindParam(":pc_id", $pc_id);
+                                    $control->bindParam(":bakim", $bakim);
+                                    $control->bindParam(":user", $user["user_id"]);
+                                    $control->bindParam(":bakim_date", $zaman);
+                                    $control->execute();
+                                    header("refresh: 0");
+                                } else {
+                                    echo "<p class='m-0 text-danger'>Hata Kodu: R-04</p>";
+                                }
+                            }
+                            ?>
+                            <p class="text-start m-0">Bakım:</p>
+                            <textarea name="bakim_text" rows="5" class="form-control"></textarea>
+                            <div class="row">
+                                <p class="m-0 mt-2 text-start col">
+                                    <?= date("d.m.Y - H:i"); ?>
+                                </p>
+                                <p class="m-0 mt-2 text-end col">
+                                    <?= $kadi; ?>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary col-sm-3 col-4" data-bs-dismiss="modal">Vazgeç</button>
+                            <button type="submit" name="bakim_kaydet" class="btn btn-primary col-sm-3 col-4">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            $control = $control->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($control as $key => $value) {
+                $bakim_id = $value["maintenance_id"];
+                if (isset($_POST["bakim_sil_$bakim_id"])) {
+                    $control = $conn->prepare("DELETE FROM maintenance WHERE maintenance_id = :id");
+                    $control->bindParam(":id", $bakim_id);
+                    $control->execute();
+                    header("refresh: 0");
+                }
             ?>
+                <h5 class="text-info mb-0 mt-4">Bakım <?= $key + 1; ?></h5>
+                <textarea rows="5" class="form-control" disabled><?= $value["maintenance_text"]; ?></textarea>
+                <div class="row">
+                    <p class="m-0 mt-2 text-start col">
+                        <?= $value["maintenance_date"]; ?>
+                    </p>
+                    <p class="m-0 mt-2 text-end col">
+                        <?= $value["user_name"]; ?>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <button name="bakim_sil_<?= $bakim_id; ?>" class="btn btn-danger col-sm-3 mt-3">Bakımı Sil</button>
+                </div>
+                <hr class="border-white border-2">
+            <?php } ?>
             <div class="text-center">
-
                 <button class="btn btn-danger col-sm-3 my-3" name="pc_sil">Bilgisayar Kaydını Sil</button>
             </div>
         </form>

@@ -23,7 +23,7 @@ if (empty($kadi)) {
     <div class="text-start mt-5 row col-sm-3 col-10 position-absolute top-50 start-50 translate-middle">
         <form method="post">
             <div class="form-floating mb-3">
-                <input name="kullaniciAdi" type="number" maxlength="11" class="form-control bg-dark text-light" id="kullanici_adi" autocomplete="off" placeholder="Kullanıcı Adı:" autofocus>
+                <input name="kullaniciAdi" type="number" maxlength="11" class="form-control bg-dark text-light" id="kullanici_adi" placeholder="Kullanıcı Adı:" autofocus>
                 <label for="kullanici_adi">Kullanıcı Adı:</label>
             </div>
             <div class="form-floating">
@@ -31,7 +31,7 @@ if (empty($kadi)) {
                 <label for="sifre">Şifre:</label>
             </div>
             <p class="text-danger m-0 mt-2"><?= $hata; ?></p>
-            <button type="submit" name="giris" class="btn btn-primary mt-3 col-sm-12">Giriş</button>
+            <button type="submit" name="giris" class="btn btn-primary mt-3 col-12">Giriş</button>
         </form>
     </div>
 <?php }else{
