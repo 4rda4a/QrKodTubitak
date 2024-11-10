@@ -26,8 +26,18 @@ if (isset($kadi)) {
         $control->execute();
         header("refresh: 0");
     }
+    if (!file_exists("./img/$pc_id.png")) {
+        include "barcodeQr.php";
+        $qrcode = new BarcodeQR();
+        $qrcode->url("http://localhost/pc?$pc_id");
+        $qrcode->draw(250, "./img/$pc_id.png");
+        header("refresh:0");
+    }
 ?>
     <div>
+        <a href="./img/<?= $pc_id; ?>.png" class="btn btn-success col-sm-3 float-end" target="_blank" download="<?= $pc_id; ?>">
+            QR İndir
+        </a>
         <form method="post">
             <h4 class="text-warning">Bilgisayar Özellikleri:</h4>
             <div class="mb-1">
@@ -225,6 +235,7 @@ if (isset($kadi)) {
                     $control->bindParam(":pc_id", $pc_id);
                     $control->execute();
                 }
+                unlink("./img/$pc_id.png");
                 header("location: bilgisayarlar");
             }
             $control = $conn->prepare("SELECT * FROM maintenance

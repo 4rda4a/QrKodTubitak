@@ -1,15 +1,18 @@
 <div class="col-sm-9 m-auto mt-5">
     <?php
     if (isset($_GET["pc"]) && isset($kadi)) {
-        $ayir = explode(",", clean($_GET["pc"]));
-        $pc_id = $ayir[0];
-        if (isset($ayir[1]) && $ayir[1] == 1) {
-            include "duzenle_page.php";
-        } elseif (isset($ayir[1]) && $ayir[1] == 2) {
-            include "bakim_page.php";
-        } else {
-            echo '<p class="m-0 text-danger text-center fs-3">Hata Kodu: I-65</p>';
-        }
+        // $ayir = explode(",", clean($_GET["pc"]));
+        $pc_id = clean($_GET["pc"]);
+        // if (isset($ayir[1]) && $ayir[1] == 1) {
+        //     include "duzenle_page.php";
+        // } elseif (isset($ayir[1]) && $ayir[1] == 2) {
+        //     include "bakim_page.php";
+        // } else {
+        //     echo '<p class="m-0 text-danger text-center fs-3">Hata Kodu: I-65</p>';
+        // }
+        include "duzenle_page.php";
+    } elseif (isset($_GET["add"]) && $_GET["add"] == "true") {
+        include "bilgisayar_ekle.php";
     } else {
     ?>
         <table id="pc_table" class="table border text-light ">
@@ -49,11 +52,8 @@
                         if (isset($kadi)) { ?>
                             <td class="text-center">
                                 <form action="bilgisayarlar" class="row g-1 text-center row-cols-2" method="get">
-                                    <button name="pc" type="submit" class="btn col-auto btn-primary pb-0" value="<?= $value["computer_no"]; ?>,1">
+                                    <button name="pc" type="submit" class="btn col-auto btn-primary m-auto pb-0" value="<?= $value["computer_no"]; ?>">
                                         <i class="fi fi-rr-customize"></i>
-                                    </button>
-                                    <button name="pc" type="submit" class="btn col-auto btn-warning pb-0 ms-auto" value="<?= $value["computer_no"]; ?>,2">
-                                        <i class="fi fi-rr-hammer-crash"></i>
                                     </button>
                                 </form>
                             </td>

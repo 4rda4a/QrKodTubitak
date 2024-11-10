@@ -235,7 +235,7 @@ if (isset($_GET["pc"])) {
                     <div class="list-group-item bg-dark">
                         <h5 class="text-warning">Yönetici İşlemleri:</h5>
                         <div class="row p-0">
-                            <a href="" class="col-sm-6 text-light list-group-item-action-2 text-center border list-group-item bg-dark">
+                            <a href="bilgisayarlar?add=true" class="col-sm-6 text-light list-group-item-action-2 text-center border list-group-item bg-dark">
                                 Bilgisayar Oluştur
                             </a>
                             <a href="" class="col-sm-6 text-light list-group-item-action-2 text-center border list-group-item bg-dark">
