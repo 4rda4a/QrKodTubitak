@@ -78,7 +78,9 @@
 }
 
 #pc_table th,
-#pc_table td {
+#pc_table td,
+#user_table th,
+#user_table td {
     border: 1px solid #fff;
 }
 

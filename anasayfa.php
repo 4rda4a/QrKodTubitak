@@ -122,6 +122,33 @@ if (isset($_GET["pc"])) {
                             <p class="m-0 text-center text-danger">
                                 Daha önce bakım yapılmamıştır.
                             </p>
+                            <?php
+                            if (empty($kadi)) {
+                            ?>
+                                <button style="background-color: #1c4934;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Giriş
+                                </button>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content bg-dark">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Giriş Yap</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-sm-10 m-auto">
+                                                    <?php
+                                                    include "login_form.php";
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary col-sm-4 col-4" data-bs-dismiss="modal">Kapat</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </div>
                     <?php }
                     echo "</div>";

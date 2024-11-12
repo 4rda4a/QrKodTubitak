@@ -23,7 +23,6 @@
                     <th>Harddisk</th>
                     <th>İşlemci</th>
                     <th>Kullanıcılar</th>
-                    <th>QR</th>
                     <?php
                     if (isset($kadi)) { ?>
                         <th>İşlem</th>
@@ -47,7 +46,6 @@
                             $control->execute();
                             echo $control->rowCount();
                             ?></td>
-                        <td></td>
                         <?php
                         if (isset($kadi)) { ?>
                             <td class="text-center">
