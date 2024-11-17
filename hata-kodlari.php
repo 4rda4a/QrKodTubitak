@@ -87,5 +87,29 @@
             </div>
         </div>
     </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button bg-dark text-danger collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ac-8" aria-expanded="false">
+                Hata Kodu: Y-86
+            </button>
+        </h2>
+        <div id="ac-8" class="accordion-collapse collapse">
+            <div class="accordion-body text-light">
+                Y-86: Yetkil oluştururken boş bırakılan alan olmaması gerekmektedir.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button bg-dark text-danger collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ac-9" aria-expanded="false">
+                Hata Kodu: Y-13
+            </button>
+        </h2>
+        <div id="ac-9" class="accordion-collapse collapse">
+            <div class="accordion-body text-light">
+                Y-13: Şifre alanını boş bırakmamanız gerekiyor.
+            </div>
+        </div>
+    </div>
     <!-- <p class="m-0 text-danger">Hata Kodu: </p> -->
 </div>

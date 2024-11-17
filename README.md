@@ -1,2 +1,7 @@
-en son paylaşırken sunucudan bilgisayar_ekle.php ve duzenle_page sayfalarındaki Qr kod oluştururken linki düzenle.
-10.11.2024 - 05:03
+index(16) düzenle
+15.11.2024 - 16:22
+
+yetki izinlerini ayarla sayfalardan
+16.11.2024 - 16:05
+
+yetkili_duzenle çalışmıyor kontrol et! gerekirse post işlemi ile çöz

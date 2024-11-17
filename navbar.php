@@ -20,9 +20,9 @@
                                                         } ?>" href="bilgisayarlar">Bilgisayarlar</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-center text-light <?php if ($_SESSION["k"] == "yoneticiler") {
+            <a class="nav-link text-center text-light <?php if ($_SESSION["k"] == "yetkililer") {
                                                             echo "bg-cadetblue";
-                                                        } ?>" href="yoneticiler">Yöneticiler</a>
+                                                        } ?>" href="yetkililer">Yetkililer</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-center text-light <?php if ($_SESSION["k"] == "hata-kodlari") {

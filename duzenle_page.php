@@ -29,7 +29,7 @@ if (isset($kadi)) {
     if (!file_exists("./img/$pc_id.png")) {
         include "barcodeQr.php";
         $qrcode = new BarcodeQR();
-        $qrcode->url("http://localhost/pc?$pc_id");
+        $qrcode->url("$link" + "$pc_id");
         $qrcode->draw(250, "./img/$pc_id.png");
         header("refresh:0");
     }

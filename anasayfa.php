@@ -156,7 +156,7 @@ if (isset($_GET["pc"])) {
                         <button type="button" class="btn btn-success col-sm-3 col-5" data-bs-toggle="modal" data-bs-target="#bakimModel">
                             Bakım Ekle
                         </button>
-                        <a class="btn btn-info col-sm-3 col-5" href="bilgisayarlar?pc=<?= $pc; ?>,1">
+                        <a class="btn btn-info col-sm-3 col-5" href="bilgisayarlar?pc=<?= $pc; ?>">
                             Düzenle
                         </a>
                         <div class="modal fade" id="bakimModel" tabindex="-1" aria-hidden="true">
@@ -265,15 +265,15 @@ if (isset($_GET["pc"])) {
                             <a href="bilgisayarlar?add=true" class="col-sm-6 text-light list-group-item-action-2 text-center border list-group-item bg-dark">
                                 Bilgisayar Oluştur
                             </a>
-                            <a href="" class="col-sm-6 text-light list-group-item-action-2 text-center border list-group-item bg-dark">
-                                Yönetici Oluştur
+                            <a href="yetkililer?add=true" class="col-sm-6 text-light list-group-item-action-2 text-center border list-group-item bg-dark">
+                                Yetkili Oluştur
                             </a>
                         </div>
                     </div>
                 <?php } ?>
-                <a href="yoneticiler" class="list-group-item list-group-item-action bg-dark text-light">
+                <a href="yetkililer" class="list-group-item list-group-item-action bg-dark text-light">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Yöneticiler</h5>
+                        <h5 class="mb-1">Yetkililer</h5>
                         <span class="text-body-light"></span>
                     </div>
                     <p class="mb-1">İletişim kurmak için sistemdeki yöneticilere göz atabilirsiniz.</p>

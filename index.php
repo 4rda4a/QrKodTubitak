@@ -12,6 +12,8 @@ if (isset($_SESSION["username"])) {
     $control->execute();
     $user = $control->fetch(PDO::FETCH_ASSOC);
 }
+
+$link = "http://localhost/pc?";
 ?>
 
 <head>
@@ -34,6 +36,7 @@ if (isset($_SESSION["username"])) {
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css'>
     <!-- DATATABLE -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css"> -->
 </head>
@@ -70,9 +73,9 @@ if (isset($_SESSION["username"])) {
     <!-- HARİCİ JS -->
     <script src="assets/script.js"></script>
     <!-- DATATABLE -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="http://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
-    <script src="http://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="http://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script> -->
 </body>
 
 </html>
