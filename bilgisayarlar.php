@@ -38,9 +38,21 @@
                 foreach ($control as $key => $value) { ?>
                     <tr>
                         <td><?= $value["computer_location"]; ?></td>
-                        <td><?= $value["computer_ram"]; ?> GB</td>
-                        <td><?= $value["computer_harddisk"]; ?> GB</td>
-                        <td><?= $value["computer_islemci"]; ?></td>
+                        <td><?php if ($value["computer_ram"] != "") {
+                                echo $value["computer_ram"];
+                            } else {
+                                "--";
+                            } ?> GB</td>
+                        <td><?php if ($value["computer_harddisk"] != "") {
+                                echo $value["computer_harddisk"];
+                            } else {
+                                "--";
+                            } ?> GB</td>
+                        <td><?php if ($value["computer_islemci"] != "") {
+                                echo $value["computer_islemci"];
+                            } else {
+                                "--";
+                            } ?></td>
                         <td><?php
                             $control = $conn->prepare("SELECT computer_user_no FROM computer_user WHERE computer_user_no = '$value[computer_no]'");
                             $control->execute();

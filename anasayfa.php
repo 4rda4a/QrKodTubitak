@@ -226,6 +226,7 @@ if (isset($_GET["pc"])) {
             </div>
         <?php
     } else {
+        include "navbar.php";
         echo "<h3 class='text-danger text-center mt-3'>Hata Kodu: I-05</h3>";
     }
 } else {

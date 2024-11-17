@@ -41,7 +41,7 @@ if (isset($kadi)) {
             if (!file_exists("./img/$pc_id.png")) {
                 include "barcodeQr.php";
                 $qrcode = new BarcodeQR();
-                $qrcode->url("$link" + "$pc_id");
+                $qrcode->url("$link" . "$pc_id");
                 $qrcode->draw(250, "./img/$pc_id.png");
                 header("location:?pc=$pc_id");
             }
@@ -55,11 +55,11 @@ if (isset($kadi)) {
             </div>
             <div class="mb-1">
                 <label>Bilgisayar Adı:</label>
-                <input name="pc_name" type="text" class="form-control">
+                <input name="pc_name" type="text" class="form-control" required>
             </div>
             <div class="mb-1">
                 <label>Bilgisayar Konum</label>
-                <input name="pc_location" type="text" class="form-control">
+                <input name="pc_location" type="text" class="form-control" required>
             </div>
             <label>Bilgisayar Ram</label>
             <div class=" mb-1 input-group">

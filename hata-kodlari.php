@@ -95,7 +95,7 @@
         </h2>
         <div id="ac-8" class="accordion-collapse collapse">
             <div class="accordion-body text-light">
-                Y-86: Yetkil oluştururken boş bırakılan alan olmaması gerekmektedir.
+                Y-86: Yetkili oluştururken boş bırakılan alan olmaması gerekmektedir.
             </div>
         </div>
     </div>

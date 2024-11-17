@@ -2,8 +2,8 @@
 if (isset($_GET["add"]) && $_GET["add"] == "true") {
     include "yetkili_ekle.php";
 } else {
-    if (isset($_POST["yetkili_duzenle"])) {
-        $user_id = clean($_POST["user_id"]);
+    if (isset($_GET["UserId"])) {
+        $user_id = clean($_GET["UserId"]);
         include "yetkili_duzenle.php";
     } else {
 ?>
@@ -36,9 +36,9 @@ if (isset($_GET["add"]) && $_GET["add"] == "true") {
                                 <?php
                                 if (isset($kadi)) {
                                 ?>
-                                    <form method="post" class="col-sm-4 col-3">
-                                        <input type="hidden" name="user_id" value="<?= $value["user_id"]; ?>">
-                                        <button class="btn btn-primary col-12" name="yetkili_duzenle">Düzenle</button>
+                                    <form method="get" class="col-sm-4 col-3">
+                                        <input type="hidden" name="UserId" value="<?= md5($value["user_id"]); ?>">
+                                        <button class="btn btn-primary col-12">Düzenle</button>
                                     </form>
                                 <?php } ?>
                             </td>

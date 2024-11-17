@@ -1,6 +1,14 @@
 <div class="col-sm-9 m-auto mt-5">
     <?php
     if (isset($kadi)) {
+        $hata = "";
+        $control = $conn->prepare("SELECT * FROM users");
+        $control->execute();
+        $control = $control->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($control as $key => $value) {
+            md5($value["user_id"]) == $user_id;
+            $user_id = $value["user_id"];
+        }
         $control = $conn->prepare("SELECT * FROM users WHERE user_id= :user_id");
         $control->bindParam(":user_id", $user_id);
         $control->execute();
@@ -24,10 +32,10 @@
                     $control->bindParam(":user_id", $user_id, PDO::PARAM_INT);
                     $control->execute();
                     if ($control) {
-                        // header("location: yetkililer");
+                        header("refresh: 0");
                     }
                 } else {
-                    echo "<p class='text-danger'>Hata Kodu: Y-86</p>";
+                    $hata = "Hata Kodu: Y-86";
                 }
             }
             ?>
@@ -64,17 +72,18 @@
                 <div class="modal fade" id="sifreUpdateModal" tabindex="-1" aria-labelledby="sifreUpdateModalLabel" aria-hidden="true">
                     <?php
                     if (isset($_POST["sifreKaydet"])) {
-                        $sifre = md5(clean($_POST["sifre"]));
+                        $sifre = clean($_POST["sifre"]);
                         if ($sifre != "") {
+                            $sifre = md5($sifre);
                             $control = $conn->prepare("UPDATE users SET
                             user_password = :user_password WHERE user_id = :user_id
                             ");
                             $control->bindParam(":user_password", $sifre);
                             $control->bindParam(":user_id", $user_id, PDO::PARAM_INT);
                             $control->execute();
-                            header("location: yetkililer");
+                            header("refresh: 0");
                         } else {
-                            echo "<p class='text-danger'>Hata Kodu: Y-13</p>";
+                            $hata = "Hata Kodu: Y-13";
                         }
                     }
                     ?>
@@ -97,6 +106,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <p class="text-danger m-0 mt-2"><?= $hata; ?></p>
                 </div>
                 <div class="text-center">
                     <button name="yetkili_kaydet" type="submit" class="btn btn-primary col-sm-3 col-4 mt-3">Yetkili Kaydet</button>
