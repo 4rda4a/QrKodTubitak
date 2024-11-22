@@ -15,7 +15,7 @@ if (isset($_SESSION["username"])) {
     $HomeUser = $user;
 }
 $url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-$link = "http://localhost/pc?";
+$link = "http://localhost/?pc=";
 ?>
 
 <head>
