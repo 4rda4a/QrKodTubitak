@@ -334,9 +334,11 @@ if (isset($_GET["pc"])) {
             </div>
             <div class="list-group col-sm-6">
                 <p class="text-center pt-5 text-warning" style="font-size: 100px; line-height: 1;">
-                    <!-- <img src="img/feature-2.svg" id="islem-img-id" class="col-8"> -->
-                    Æ
-                    <span class="text-center d-block" style="line-height: 1;">Yazılım</span>
+                    <!-- Æ
+                    <span class="text-center d-block" style="line-height: 1;">Yazılım</span> -->
+                </p>
+                <p class="text-warning text-center fs-4 pt-4">
+                    QR Kod Destekli Bilgisayar Yönetim ve Kullanıcı Takip Sistemi
                 </p>
             </div>
         </div>
