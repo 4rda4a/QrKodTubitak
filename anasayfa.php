@@ -261,8 +261,15 @@ if (isset($_GET["pc"])) {
                 <?php
                 if (isset($kadi)) { ?>
                     <div class="list-group-item bg-dark">
-                        <h5 class="text-warning">Yönetici İşlemleri:</h5>
+                        <h5 class="text-warning">Yetkili İşlemleri:</h5>
                         <div class="row p-0">
+                        <!-- <?php
+                            if ($user["yetki_id"] > 1) {
+                            ?>
+                            <a href="bilgisayarlar?add=true" class="col-sm-6 text-light list-group-item-action-2 text-center border list-group-item bg-dark">
+                                Bilgisayar Oluştur
+                            </a>
+                            <?php } ?> -->
                             <a href="bilgisayarlar?add=true" class="col-sm-6 text-light list-group-item-action-2 text-center border list-group-item bg-dark">
                                 Bilgisayar Oluştur
                             </a>

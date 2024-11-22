@@ -2,6 +2,7 @@
 <html lang="tr">
 <?php
 include_once "conn.php";
+$zaman = date("d.m.Y - H:i");
 if (isset($_SESSION["username"])) {
     $kadi = $_SESSION["username"];
 
@@ -12,7 +13,7 @@ if (isset($_SESSION["username"])) {
     $control->execute();
     $user = $control->fetch(PDO::FETCH_ASSOC);
 }
-
+$url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 $link = "http://localhost/pc?";
 ?>
 
@@ -28,7 +29,7 @@ $link = "http://localhost/pc?";
     <!-- FAVICON -->
     <link rel="icon" href="img/feature-2.svg">
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/style.css?asd">
+    <link rel="stylesheet" href="assets/style.css?61845">
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -50,6 +51,12 @@ $link = "http://localhost/pc?";
                 $_SESSION["k"] = $dosya_kategori = $k[0];
                 include "navbar.php";
                 if (file_exists($dosya_kategori . ".php")) {
+                    if (isset($_GET["success"]) && $_GET["success"] == "true") {
+                        alert("✅ İşleminiz başarılı bir şekilde gerçekleşmiştir!", "success");
+                    }
+                    if (isset($_GET["success"]) && $_GET["success"] == "false") {
+                        alert("❌ İşleminiz gerçekleştirilirken bir sorun oluştu!", "danger");
+                    }
                     include $dosya_kategori . ".php";
                 } else {
                     if (isset($k[1])) {

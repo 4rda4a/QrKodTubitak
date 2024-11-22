@@ -8,6 +8,7 @@ if (isset($_GET["add"]) && $_GET["add"] == "true") {
     } else {
 ?>
         <div class="col-sm-9 m-auto mt-5">
+            <a href="?add=true" class="btn btn-primary col-sm-3 col-6 mb-3">Yetkili Ekle</a>
             <div class="row text-center text-warning">
                 <p class="col fs-4 m-0">Adı</p>
                 <p class="col fs-4 m-0">Yetki</p>
@@ -26,7 +27,7 @@ if (isset($_GET["add"]) && $_GET["add"] == "true") {
                             <td class="col text-flex-center text-d-emphasis"><?= $value["user_name"]; ?></td>
                             <td class="col text-flex-center text-s-emphasis"><?= $value["yetki"]; ?></td>
                             <td class="col text-flex-center text-center text-p-emphasis">
-                                <button type="button" class="btn btn-success col-sm-4 col-3 mx-1"
+                                <button type="button" class="btn btn-success col-sm-3 col-3 mx-1"
                                     data-bs-toggle="popover" data-bs-placement="right"
                                     data-bs-custom-class="custom-popover"
                                     data-bs-title="<?= $value["yetki"]; ?>"
@@ -36,9 +37,13 @@ if (isset($_GET["add"]) && $_GET["add"] == "true") {
                                 <?php
                                 if (isset($kadi)) {
                                 ?>
-                                    <form method="get" class="col-sm-4 col-3">
+                                    <form method="get" class="col-sm-4 col-3 me-1">
                                         <input type="hidden" name="UserId" value="<?= md5($value["user_id"]); ?>">
                                         <button class="btn btn-primary col-12">Düzenle</button>
+                                    </form>
+                                    <form method="post" action="logs" class="col-sm-5 col-4">
+                                        <input type="hidden" name="UserId" value="<?= md5($value["user_id"]); ?>">
+                                        <button class="btn btn-secondary col-12">Aktiviteler</button>
                                     </form>
                                 <?php } ?>
                             </td>

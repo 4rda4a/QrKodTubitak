@@ -1,13 +1,15 @@
 <div class="col-sm-9 m-auto mt-5">
     <?php
-    if (isset($kadi)) {
+    if (isset($kadi) && $user["yetki_id"] > 2) {
         $hata = "";
         $control = $conn->prepare("SELECT * FROM users");
         $control->execute();
         $control = $control->fetchAll(PDO::FETCH_ASSOC);
         foreach ($control as $key => $value) {
-            md5($value["user_id"]) == $user_id;
-            $user_id = $value["user_id"];
+            if (md5($value["user_id"]) == $user_id) {
+                $user_id = $value["user_id"];
+                break;
+            }
         }
         $control = $conn->prepare("SELECT * FROM users WHERE user_id= :user_id");
         $control->bindParam(":user_id", $user_id);
@@ -30,13 +32,20 @@
                     $control->bindParam(":yetki", $yetki);
                     $control->bindParam(":tc", $tc);
                     $control->bindParam(":user_id", $user_id, PDO::PARAM_INT);
-                    $control->execute();
-                    if ($control) {
-                        header("refresh: 0");
+                    if ($control->execute()) {
+                        header("location: " . $_SERVER['REQUEST_URI'] . "&success=true");
+                    } else {
+                        header("location: " . $_SERVER['REQUEST_URI'] . "&success=false");
                     }
                 } else {
                     $hata = "Hata Kodu: Y-86";
                 }
+            }
+            if (isset($_POST["yetkili_sil"])) {
+                $control = $conn->prepare("DELETE FROM users WHERE user_id = :user_id");
+                $control->bindParam(":user_id", $user_id);
+                $control->execute();
+                header("location: yetkililer?success=true");
             }
             ?>
             <form method="post">
@@ -66,7 +75,7 @@
                         ?>
                     </select>
                 </div>
-                <button type="button" class="btn btn-warning mt-2 col-sm-3 col-4" data-bs-toggle="modal" data-bs-target="#sifreUpdateModal">
+                <button type="button" class="btn btn-warning mt-2 col-sm-3 col-6" data-bs-toggle="modal" data-bs-target="#sifreUpdateModal">
                     Şifre Güncelle
                 </button>
                 <div class="modal fade" id="sifreUpdateModal" tabindex="-1" aria-labelledby="sifreUpdateModalLabel" aria-hidden="true">
@@ -81,7 +90,7 @@
                             $control->bindParam(":user_password", $sifre);
                             $control->bindParam(":user_id", $user_id, PDO::PARAM_INT);
                             $control->execute();
-                            header("refresh: 0");
+                            header("location: " . $_SERVER['REQUEST_URI'] . "&success=true");
                         } else {
                             $hata = "Hata Kodu: Y-13";
                         }
@@ -111,7 +120,10 @@
                     <p class="text-danger m-0 mt-2"><?= $hata; ?></p>
                 </div>
                 <div class="text-center">
-                    <button name="yetkili_kaydet" type="submit" class="btn btn-primary col-sm-3 col-4 mt-3">Yetkili Kaydet</button>
+                    <button name="yetkili_kaydet" type="submit" class="btn btn-primary col-sm-3 col-6 mt-3">Yetkili Kaydet</button>
+                </div>
+                <div class="text-center">
+                    <button name="yetkili_sil" class="btn btn-danger col-sm-2 col-4 mt-3">Yetkili Sil</button>
                 </div>
             </form>
         </div>
@@ -121,6 +133,8 @@
             }
         </script>
     <?php
+    } else {
+        echo '<h3 class="text-danger text-center">Hata Kodu: S-01</h3>';
     }
     ?>
 </div>

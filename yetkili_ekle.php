@@ -1,6 +1,6 @@
 <div class="col-sm-9 m-auto mt-5">
     <?php
-    if (isset($kadi)) {
+    if (isset($kadi) && $user["yetki_id"] > 2) {
     ?>
         <div>
             <?php
@@ -24,9 +24,12 @@
                     $control->bindParam(":sifre", $sifre);
                     $control->bindParam(":yetki", $yetki);
                     $control->bindParam(":tc", $tc);
-                    $control->execute();
-                    header("location: yetkililer");
-                }else{
+                    if ($control->execute()) {
+                        header("location: yetkililer?success=true");
+                    } else {
+                        header("location: yetkililer?success=false");
+                    }
+                } else {
                     echo "<p class='text-danger'>Hata Kodu: Y-86</p>";
                 }
             }
@@ -75,6 +78,8 @@
             }
         </script>
     <?php
+    } else {
+        echo '<h3 class="text-danger text-center">Hata Kodu: S-01</h3>';
     }
     ?>
 </div>

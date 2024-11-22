@@ -52,6 +52,18 @@
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header">
+            <button class="accordion-button bg-dark text-danger collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#e-44" aria-expanded="false">
+                Hata Kodu: E-44
+            </button>
+        </h2>
+        <div id="e-44" class="accordion-collapse collapse">
+            <div class="accordion-body text-light">
+                E-44: Böyle bir sayfa bulunmamaktadır.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
             <button class="accordion-button bg-dark text-danger collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ac-5" aria-expanded="false">
                 Hata Kodu: I-05
             </button>
@@ -87,6 +99,19 @@
             </div>
         </div>
     </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button bg-dark text-danger collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#s01" aria-expanded="false">
+                Hata Kodu: S-01
+            </button>
+        </h2>
+        <div id="s01" class="accordion-collapse collapse">
+            <div class="accordion-body text-light">
+                S-01: Yetkiniz yetersiz!
+            </div>
+        </div>
+    </div>
+
     <div class="accordion-item">
         <h2 class="accordion-header">
             <button class="accordion-button bg-dark text-danger collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ac-8" aria-expanded="false">

@@ -15,6 +15,7 @@
         include "bilgisayar_ekle.php";
     } else {
     ?>
+        <a href="?add=true" class="btn btn-primary col-sm-3 col-5 float-end mb-3">Bilgisayar Ekle</a>
         <table id="pc_table" class="table border text-light">
             <thead>
                 <tr class="text-center">
@@ -75,7 +76,6 @@
             </tbody>
         </table>
         <script>
-            new DataTable('#pc_table');
             document.getElementById("dt-search-0").classList.add("bg-dark", "text-light");
         </script>
     <?php } ?>

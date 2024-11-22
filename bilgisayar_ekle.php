@@ -1,5 +1,5 @@
 <?php
-if (isset($kadi)) {
+if (isset($kadi) && $user["yetki_id"] > 1) {
     $harfler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $rastgeleHarfler = '';
     for ($i = 0; $i < 4; $i++) {
@@ -81,5 +81,7 @@ if (isset($kadi)) {
         </form>
     </div>
 <?php
+}else{
+    echo '<h3 class="text-danger text-center">Hata Kodu: S-01</h3>';
 }
 ?>

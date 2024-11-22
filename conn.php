@@ -53,6 +53,17 @@ function clean($x)
 	$x = str_replace("'", "''", $x);
 	return $x;
 }
+function alert($mesaj, $renk)
+{
+	echo '
+    <div id="alertBtnId" class="p-0 mt-3 position-fixed col-sm-8 col-12 m-auto start-50 translate-middle alert alert-' . $renk . '" role="alert">
+        <div class="p-4 pb-2">' . $mesaj . '</div>
+		<i class="fi fi-rr-cross-circle" id="alertRemoveBtn" onclick="alertRem()"></i>
+		<div class="progress " role="progressbar" aria-valuemin="0" aria-valuemax="100">
+			<div id="alertBtnTimeStick" class="progress-bar progress-bar-striped progress-bar-animated bg-' . $renk . '"></div>
+		</div>
+    </div>';
+}
 // Veritabanı bağlantısını UTF-8 olarak ayarla
 $conn->query("SET NAMES utf8");
 $conn->query("SET CHARACTER SET utf8");
