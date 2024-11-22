@@ -45,7 +45,11 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
         <script>
-            new DataTable('#pc_table');
+            new DataTable('#pc_table', {
+                order: [
+                    [0, 'desc']
+                ]
+            });
         </script>
     <?php } else {
         echo '<h3 class="text-danger text-center">Hata Kodu: S-01</h3>';

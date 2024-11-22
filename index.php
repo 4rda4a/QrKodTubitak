@@ -12,6 +12,7 @@ if (isset($_SESSION["username"])) {
     $control->bindParam(':kadi', $kadi, PDO::PARAM_STR);
     $control->execute();
     $user = $control->fetch(PDO::FETCH_ASSOC);
+    $HomeUser = $user;
 }
 $url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 $link = "http://localhost/pc?";

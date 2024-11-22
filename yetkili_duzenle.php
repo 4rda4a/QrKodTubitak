@@ -23,6 +23,39 @@
                 $yetki = clean($_POST["yetki"]);
                 $tc = clean($_POST["tc"]);
                 if ($user_name != "" && $yetki != 0 && $tc != "" && strlen($tc) == 11) {
+                    //LOG
+                    $control = $conn->prepare("INSERT INTO logs (
+                    user_id, 
+                    bakim, 
+                    bakim_zaman) VALUES(
+                    :user_id,
+                    :bakim,
+                    :bakim_zaman
+                    )");
+                    $control->bindParam(":user_id", $HomeUser["user_id"]);
+                    $d0 = "";
+                    if ($user["computer_name"] != $user_name) {
+                        $d0 = "<ol>Yetkili Adı: $user_name</ol>";
+                    }
+                    if ($user["computer_location"] != $tc) {
+                        $d0 = $d0 . "<ol>Yetkili Tc: $tc</ol>";
+                    }
+                    if ($user["computer_ram"] != $yetki) {
+                        $yetkiControl = $conn->prepare("SELECT * FROM yetkiler WHERE yetki_id = $yetki");
+                        $yetkiControl->execute();
+                        $yetkiControl = $yetkiControl->fetch(PDO::FETCH_ASSOC);
+                        $yetkiControlText = $yetkiControl["yetki"];
+                        $d0 = $d0 . "<ol>Yetki: $yetkiControlText</ol>";
+                    }
+                    $eskiUserName = $user["user_name"];
+                    $bakim_text = "'$eskiUserName' adlı kişinin üzerinde değişiklikler yaptı.
+                    <div>
+                        <p class='m-0'>Detaylar:</p>
+                        $d0
+                    </div>";
+                    $control->bindParam(":bakim", $bakim_text);
+                    $control->bindParam(":bakim_zaman", $zaman);
+                    $control->execute();
                     $control = $conn->prepare("UPDATE users SET
                         user_name = :user_name,
                         yetki_id = :yetki,
@@ -42,6 +75,25 @@
                 }
             }
             if (isset($_POST["yetkili_sil"])) {
+                $user_name_adi = clean($_POST["adi"]);
+                //LOG
+                $LogControl = $conn->prepare("INSERT INTO logs (
+                    user_id, 
+                    bakim, 
+                    bakim_zaman) VALUES(
+                    :user_id,
+                    :bakim,
+                    :bakim_zaman
+                    )");
+                $LogControl->bindParam(":user_id", $HomeUser["user_id"]);
+                $bakim_text = "Bir yetkiliyi sildi.
+                <div>
+                    <p class='m-0'></p>
+                    <ol>Yetkili Adı: $user_name_adi</ol>
+                </div>";
+                $LogControl->bindParam(":bakim", $bakim_text);
+                $LogControl->bindParam(":bakim_zaman", $zaman);
+                $LogControl->execute();
                 $control = $conn->prepare("DELETE FROM users WHERE user_id = :user_id");
                 $control->bindParam(":user_id", $user_id);
                 $control->execute();
@@ -82,6 +134,7 @@
                     <?php
                     if (isset($_POST["sifreKaydet"])) {
                         $sifre = clean($_POST["sifre"]);
+                        $NoSecretSifre = clean($_POST["sifre"]);
                         if ($sifre != "") {
                             $sifre = md5($sifre);
                             $control = $conn->prepare("UPDATE users SET
@@ -90,6 +143,25 @@
                             $control->bindParam(":user_password", $sifre);
                             $control->bindParam(":user_id", $user_id, PDO::PARAM_INT);
                             $control->execute();
+                            //LOG
+                            $LogControl = $conn->prepare("INSERT INTO logs (
+                            user_id, 
+                            bakim, 
+                            bakim_zaman) VALUES(
+                            :user_id,
+                            :bakim,
+                            :bakim_zaman
+                            )");
+                            $LogControl->bindParam(":user_id", $HomeUser["user_id"]);
+                            $userName = clean($_POST["adi"]);
+                            $bakim_text = "'$userName' adlı kullanıcının şifresini değiştirildi.
+                            <div>
+                                <p class='m-0'></p>
+                                <ol>Yeni Şifre: $NoSecretSifre</ol>
+                            </div>";
+                            $LogControl->bindParam(":bakim", $bakim_text);
+                            $LogControl->bindParam(":bakim_zaman", $zaman);
+                            $LogControl->execute();
                             header("location: " . $_SERVER['REQUEST_URI'] . "&success=true");
                         } else {
                             $hata = "Hata Kodu: Y-13";

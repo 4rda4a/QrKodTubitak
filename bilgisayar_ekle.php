@@ -37,7 +37,40 @@ if (isset($kadi) && $user["yetki_id"] > 1) {
             $control->bindParam(":harddisk", $harddisk);
             $control->bindParam(":islemci", $islemci);
             $control->execute();
-
+            //LOG 
+            $control = $conn->prepare("INSERT INTO logs (
+                user_id, 
+                bakim, 
+                bakim_zaman) VALUES(
+                :user_id,
+                :bakim,
+                :bakim_zaman
+                )");
+            $control->bindParam(":user_id", $user["user_id"]);
+            $d0 = "";
+            if ($name != "") {
+                $d0 = "<ol>Bilgisayar Adı: $name</ol>";
+            }
+            if ($location != "") {
+                $d0 = $d0 . "<ol>Bilgisayar Konum: $location</ol>";
+            }
+            if ($ram != "") {
+                $d0 = $d0 . "<ol>Bilgisayar Ram: $ram GB</ol>";
+            }
+            if ($harddisk != "") {
+                $d0 = $d0 . "<ol>Bilgisayar Harddisk: $harddisk GB</ol>";
+            }
+            if ($islemci != "") {
+                $d0 = $d0 . "<ol>Bilgisayar İşlemci: $islemci</ol>";
+            }
+            $bakim_text = "ID'si '<a href='bilgisayarlar?pc=$sonuc'>$sonuc</a>' olan bir bilgisayar oluşturdu.
+                <div>
+                    <p class='m-0'>Detaylar:</p>
+                    $d0
+                </div>";
+            $control->bindParam(":bakim", $bakim_text);
+            $control->bindParam(":bakim_zaman", $zaman);
+            $control->execute();
             if (!file_exists("./img/$pc_id.png")) {
                 include "barcodeQr.php";
                 $qrcode = new BarcodeQR();
@@ -81,7 +114,7 @@ if (isset($kadi) && $user["yetki_id"] > 1) {
         </form>
     </div>
 <?php
-}else{
+} else {
     echo '<h3 class="text-danger text-center">Hata Kodu: S-01</h3>';
 }
 ?>

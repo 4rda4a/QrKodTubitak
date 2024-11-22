@@ -6,6 +6,7 @@
             <?php
             if (isset($_POST["yetkili_kaydet"])) {
                 $user_name = clean($_POST["adi"]);
+                $sifreNoSecret = clean($_POST["sifre"]);
                 $sifre = md5(clean($_POST["sifre"]));
                 $yetki = clean($_POST["yetki"]);
                 $tc = clean($_POST["tc"]);
@@ -26,6 +27,41 @@
                     $control->bindParam(":tc", $tc);
                     if ($control->execute()) {
                         header("location: yetkililer?success=true");
+                        //LOG 
+                        $control = $conn->prepare("INSERT INTO logs (
+                        user_id, 
+                        bakim, 
+                        bakim_zaman) VALUES(
+                        :user_id,
+                        :bakim,
+                        :bakim_zaman
+                        )");
+                        $yetkiControl = $conn->prepare("SELECT * FROM yetkiler WHERE yetki_id = $yetki");
+                        $yetkiControl->execute();
+                        $yetkiControl = $yetkiControl->fetch(PDO::FETCH_ASSOC);
+                        $yetkiControlText = $yetkiControl["yetki"];
+                        $control->bindParam(":user_id", $user["user_id"]);
+                        $d0 = "";
+                        if ($user_name != "") {
+                            $d0 = "<ol>Yetkili Adı: $user_name</ol>";
+                        }
+                        if ($sifreNoSecret != "") {
+                            $d0 = $d0 . "<ol>Yetkili Şifre: $sifreNoSecret</ol>";
+                        }
+                        if ($yetkiControlText != "") {
+                            $d0 = $d0 . "<ol>Yetki: $yetkiControlText</ol>";
+                        }
+                        if ($tc != "") {
+                            $d0 = $d0 . "<ol>Yetkili Tc: $tc</ol>";
+                        }
+                        $bakim_text = "'$user_name' adına sahip '<span class='text-warning'>$yetkiControlText</span>' yetkisinde bir yetkili oluşturdu.
+                        <div>
+                            <p class='m-0'>Detaylar:</p>
+                            $d0
+                        </div>";
+                        $control->bindParam(":bakim", $bakim_text);
+                        $control->bindParam(":bakim_zaman", $zaman);
+                        $control->execute();
                     } else {
                         header("location: yetkililer?success=false");
                     }

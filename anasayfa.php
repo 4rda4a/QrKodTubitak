@@ -101,7 +101,7 @@ if (isset($_GET["pc"])) {
                         $control = $control->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($control as $key => $value) {
                     ?>
-                            <div class="col my-1 text-center">
+                            <div class="col my-1 text-center" id="Bakim_<?= $value['maintenance_id']; ?>">
                                 <p class="m-0 text-center text-primary"><?= $key + 1; ?>. Bakım</p>
                                 <p class="m-0">
                                     <span class="text-p-emphasis2"> İşlem:</span>
@@ -115,6 +115,24 @@ if (isset($_GET["pc"])) {
                                     <span class="text-p-emphasis2"> Yetkili:</span>
                                     <?= $value["user_name"]; ?>
                                 </p>
+                                <?php if (isset($kadi)) { ?>
+                                    <p class="m-0 pt-2">
+                                        <i onclick="MaintenanceDelete(<?= $value['maintenance_id']; ?>)" class="fi fi-rr-trash text-danger border rounded-circle px-1 pt-1 cursor-pointer"></i>
+                                    </p>
+                                    <script>
+                                        function MaintenanceDelete(MaintenanceId) {
+                                            $.ajax({
+                                                url: "assets/ajax.php",
+                                                type: "POST",
+                                                data: "MaintenanceId=" + MaintenanceId +
+                                                    "&UserId=" + <?= $user["user_id"]; ?>,
+                                                success: function(data) {
+                                                    document.getElementById("Bakim_" + MaintenanceId).remove();
+                                                }
+                                            });
+                                        }
+                                    </script>
+                                <?php } ?>
                             </div>
                         <?php }
                     } else { ?>
@@ -185,6 +203,24 @@ if (isset($_GET["pc"])) {
                                                 $control->bindParam(":bakim", $bakim);
                                                 $control->bindParam(":user", $user["user_id"]);
                                                 $control->bindParam(":bakim_date", $zaman);
+                                                $control->execute();
+                                                //LOG 
+                                                $control = $conn->prepare("INSERT INTO logs (
+                                                user_id, 
+                                                bakim, 
+                                                bakim_zaman) VALUES(
+                                                :user_id,
+                                                :bakim,
+                                                :bakim_zaman
+                                                )");
+                                                $control->bindParam(":user_id", $user["user_id"]);
+                                                $bakim_text = "ID'si '<a href='bilgisayarlar?pc=$pc'>$pc</a>' olan bilgisayara bakım ekledi.
+                                                <div>
+                                                    <p class='m-0'>Detaylar:</p>
+                                                    <ol>Bakım: $bakim</ol>
+                                                </div>";
+                                                $control->bindParam(":bakim", $bakim_text);
+                                                $control->bindParam(":bakim_zaman", $zaman);
                                                 $control->execute();
                                                 header("refresh: 0");
                                             } else {
@@ -263,9 +299,9 @@ if (isset($_GET["pc"])) {
                     <div class="list-group-item bg-dark">
                         <h5 class="text-warning">Yetkili İşlemleri:</h5>
                         <div class="row p-0">
-                        <!-- <?php
-                            if ($user["yetki_id"] > 1) {
-                            ?>
+                            <!-- <?php
+                                    if ($user["yetki_id"] > 1) {
+                                    ?>
                             <a href="bilgisayarlar?add=true" class="col-sm-6 text-light list-group-item-action-2 text-center border list-group-item bg-dark">
                                 Bilgisayar Oluştur
                             </a>

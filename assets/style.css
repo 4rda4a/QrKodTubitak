@@ -153,3 +153,7 @@ ol {
     list-style-type: disc;
     margin: 0px !important;
 }
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
