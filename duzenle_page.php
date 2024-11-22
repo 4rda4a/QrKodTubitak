@@ -318,7 +318,6 @@ if (isset($kadi) && $user["yetki_id"] > 1) {
                         <div class="mb-1 col-sm-6">
                             <label>Bölüm:</label>
                             <select name="pc_user_bolum_<?= $uid; ?>" class="form-control">
-                                <option value="0">Seçiniz</option>
                                 <?php
                                 $control = $conn->prepare("SELECT * FROM bolumler ORDER BY bolum_text ASC");
                                 $control->execute();
