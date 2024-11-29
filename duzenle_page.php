@@ -179,11 +179,11 @@ if (isset($kadi) && $user["yetki_id"] > 1) {
                             <input type="text" name="new_user_numara" class="form-control">
                         </div>
                         <div class="row">
-                            <div class="mb-1 col-sm-6">
+                            <div class="mb-1 col-sm-12">
                                 <label>Sınıf:</label>
                                 <input type="text" name="new_user_sinif" class="form-control">
                             </div>
-                            <div class="mb-1 col-sm-6">
+                            <!-- <div class="mb-1 col-sm-6">
                                 <label>Bölüm:</label>
                                 <select name="new_user_bolum<?= $uid; ?>" class="form-control">
                                     <option value="0">Seçiniz</option>
@@ -198,7 +198,7 @@ if (isset($kadi) && $user["yetki_id"] > 1) {
                                     }
                                     ?>
                                 </select>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="text-center">
                             <button name="kullanici_kaydet" type="submit" class="btn btn-warning col-sm-3 mt-3">
@@ -311,11 +311,11 @@ if (isset($kadi) && $user["yetki_id"] > 1) {
                         <input name="pc_user_numara_<?= $uid; ?>" type="text" class="form-control" value="<?= $value["computer_user_numara"]; ?>">
                     </div>
                     <div class="row">
-                        <div class="mb-1 col-sm-6">
+                        <div class="mb-1 col-sm-12">
                             <label>Sınıf:</label>
                             <input name="pc_user_sinif_<?= $uid; ?>" type="text" class="form-control" value="<?= $value["computer_user_sinif"]; ?>">
                         </div>
-                        <div class="mb-1 col-sm-6">
+                        <!-- <div class="mb-1 col-sm-6">
                             <label>Bölüm:</label>
                             <select name="pc_user_bolum_<?= $uid; ?>" class="form-control">
                                 <?php
@@ -331,7 +331,7 @@ if (isset($kadi) && $user["yetki_id"] > 1) {
                                 }
                                 ?>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="text-center">
                         <button name="kullanici_guncelle_<?= $uid; ?>" type="submit" class="btn btn-primary col-sm-3 mt-3">Kullanıcıyı Güncelle</button>
