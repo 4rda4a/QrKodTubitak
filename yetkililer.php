@@ -1,14 +1,15 @@
-<?php
-if (isset($_GET["add"]) && $_GET["add"] == "true") {
-    include "yetkili_ekle.php";
-} else {
-    if (isset($_GET["UserId"])) {
-        $user_id = clean($_GET["UserId"]);
-        include "yetkili_duzenle.php";
+<div class="col-sm-9 m-auto mt-5">
+    <?php
+    if (isset($_GET["add"]) && $_GET["add"] == "true") {
+        include "yetkili_ekle.php";
     } else {
-?>
-        <div class="col-sm-9 m-auto mt-5">
-            <a href="?add=true" class="btn btn-primary col-sm-3 col-6 mb-3">Yetkili Ekle</a>
+        if (isset($_GET["UserId"])) {
+            $user_id = clean($_GET["UserId"]);
+            include "yetkili_duzenle.php";
+        } else {
+            if (isset($kadi)) { ?>
+                <a href="?add=true" class="btn btn-primary col-sm-3 col-6 mb-3">Yetkili Ekle</a>
+            <?php } ?>
             <div class="row text-center text-warning">
                 <p class="col fs-4 m-0">Adı</p>
                 <p class="col fs-4 m-0">Yetki</p>
@@ -63,7 +64,7 @@ if (isset($_GET["add"]) && $_GET["add"] == "true") {
                 // new DataTable('#user_table');
                 // document.getElementById("dt-search-0").classList.add("bg-dark", "text-light");
             </script>
-        </div>
+</div>
 <?php }
-}
+    }
 ?>

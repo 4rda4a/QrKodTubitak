@@ -14,8 +14,10 @@
     } elseif (isset($_GET["add"]) && $_GET["add"] == "true") {
         include "bilgisayar_ekle.php";
     } else {
-    ?>
-        <a href="?add=true" class="btn btn-primary col-sm-3 col-5 float-end mb-3">Bilgisayar Ekle</a>
+        if (isset($kadi)) { ?>
+            <a href="?add=true" class="btn btn-primary col-sm-3 col-5 mb-3">Bilgisayar Ekle</a>
+        <?php }
+        ?>
         <table id="pc_table" class="table border text-light">
             <thead>
                 <tr class="text-center">
